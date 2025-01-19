@@ -18,20 +18,32 @@ namespace Assets.Scripts {
         public TMP_Dropdown roomsDropdown;
         public TMP_InputField saveRoomInput;
 
-        void Start(){
-            // 1. Check Screen.width and set panel width accordingly
-            var transform = panel.GetComponent<RectTransform>();
+        float screenWidth;
+        RectTransform panelTransform;
 
-            // 2. load & populate obstacle names from the `Assets/Prefabs/Obstacles`
+        void Start(){
+            panelTransform = panel.GetComponent<RectTransform>();
+
+            // 1. load & populate obstacle names from the `Assets/Prefabs/Obstacles`
             //   dir
 
-            // 3. load & populate room names from the `Assets/Resources/Rooms` dir
+            // 2. load & populate room names from the `Assets/Resources/Rooms` dir
+        }
+
+        void Update(){
+            if(screenWidth == Screen.width)
+                return;
+
+            screenWidth = Screen.width;
+            var offsetMin = panelTransform.offsetMin;
+            offsetMin.x = Screen.width * .8f;
+            panelTransform.offsetMin = offsetMin;
         }
 
         public void DeleteObject(){
 
         }
-        
+
         public void CreateObject(){
 
         }
