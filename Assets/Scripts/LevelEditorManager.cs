@@ -24,6 +24,9 @@ namespace Assets.Scripts {
         private readonly string obstaclesPath = "Assets/Prefabs/Obstacles";
         private readonly string roomsPath = "Assets/Resources/Rooms";
         private List<GameObject> obstacleGameObjects = new();
+        private GameObject selectedObject;
+        private Plane dragPlane;          // Plane for object movement
+        private Vector3 offset;
 
         void Start(){
             // 1. Check Screen.width and set panel width accordingly
@@ -37,7 +40,69 @@ namespace Assets.Scripts {
             PopulateRooms();
         }
 
-        void PopulateObstacles()
+        void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                SelectObject();
+            }
+
+            if (Input.GetMouseButton(0) && selectedObject != null)
+            {
+                DragObject();
+            }
+
+            if (Input.GetMouseButtonUp(0) && selectedObject != null)
+            {
+                ReleaseObject();
+            }
+
+            if (selectedObject != null)
+            {
+                CordsChanged();
+            }            
+        }
+
+        private void SelectObject()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                selectedObject = hit.collider.gameObject;
+
+                dragPlane = new Plane(Camera.main.transform.forward, selectedObject.transform.position);
+
+                if (dragPlane.Raycast(ray, out float enter))
+                {
+                    Vector3 hitPoint = ray.GetPoint(enter);
+                    offset = selectedObject.transform.position - hitPoint;
+                }
+
+                Debug.Log($"Selected Object: {selectedObject.name}");
+            }
+        }
+
+        private void DragObject()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (dragPlane.Raycast(ray, out float enter))
+            {
+                Vector3 hitPoint = ray.GetPoint(enter);
+                Vector3 newPosition = hitPoint + offset;
+
+                selectedObject.transform.position = newPosition;
+            }
+        }
+
+        private void ReleaseObject()
+        {
+            Debug.Log($"Released Object: {selectedObject.name}");
+            selectedObject = null;
+        }
+
+        private void PopulateObstacles()
         {
             obstacleSelector.ClearOptions();
             obstacleGameObjects.Clear(); 
@@ -63,7 +128,7 @@ namespace Assets.Scripts {
             obstacleSelector.AddOptions(obstacleGameObjects.Select(x => x.name).ToList());
         }
 
-        void PopulateRooms()
+        private void PopulateRooms()
         {
             roomsDropdown.ClearOptions();
 
@@ -110,15 +175,21 @@ namespace Assets.Scripts {
 
         }
 
-        public void CoordsChanged()
+        public void CordsChanged()
         {
+            if (selectedObject == null) return;
 
+            Vector3 currentPos = selectedObject.transform.position;
+
+            xInput.text = currentPos.x.ToString("F2");
+            yInput.text = currentPos.y.ToString("F2");
+            zInput.text = currentPos.z.ToString("F2");
         }
 
         public void ListItemSelected()
         {
-
         }
+
 
         public void LoadRoom()
         {
@@ -129,7 +200,5 @@ namespace Assets.Scripts {
         {
 
         }
-
-
     }
 }
