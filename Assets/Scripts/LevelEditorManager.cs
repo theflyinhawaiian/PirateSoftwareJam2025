@@ -63,45 +63,6 @@ namespace Assets.Scripts {
             }            
         }
 
-        private void SelectObject()
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hit))
-            {
-                selectedObject = hit.collider.gameObject;
-
-                dragPlane = new Plane(Camera.main.transform.forward, selectedObject.transform.position);
-
-                if (dragPlane.Raycast(ray, out float enter))
-                {
-                    Vector3 hitPoint = ray.GetPoint(enter);
-                    offset = selectedObject.transform.position - hitPoint;
-                }
-
-                Debug.Log($"Selected Object: {selectedObject.name}");
-            }
-        }
-
-        private void DragObject()
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (dragPlane.Raycast(ray, out float enter))
-            {
-                Vector3 hitPoint = ray.GetPoint(enter);
-                Vector3 newPosition = hitPoint + offset;
-
-                selectedObject.transform.position = newPosition;
-            }
-        }
-
-        private void ReleaseObject()
-        {
-            Debug.Log($"Released Object: {selectedObject.name}");
-            selectedObject = null;
-        }
-
         private void PopulateObstacles()
         {
             obstacleSelector.ClearOptions();
@@ -149,11 +110,6 @@ namespace Assets.Scripts {
             roomsDropdown.AddOptions(roomNames);
         }
 
-        public void DeleteObject()
-        {
-
-        }
-
         public void CreateObject()
         {
             GameObject selectedObstacle = obstacleGameObjects[obstacleSelector.value];
@@ -170,9 +126,73 @@ namespace Assets.Scripts {
             }
         }
 
+        public void DeleteObject()
+        {
+            if (selectedObject != null)
+            {
+                Debug.Log($"Deleting Object: {selectedObject.name}");
+
+                // Destroy the selected object
+                Destroy(selectedObject);
+
+                // Clear the selection
+                selectedObject = null;
+
+                // Clear the input fields
+                xInput.text = "";
+                yInput.text = "";
+                zInput.text = "";
+            }
+            else
+            {
+                Debug.LogWarning("No object selected to delete.");
+            }
+        }
+
         public void ToggleViewMode() 
         {
 
+        }
+
+        #region Object-Movement
+
+        private void SelectObject()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hit))
+            {
+                selectedObject = hit.collider.gameObject;
+
+                dragPlane = new Plane(Camera.main.transform.forward, selectedObject.transform.position);
+
+                if (dragPlane.Raycast(ray, out float enter))
+                {
+                    Vector3 hitPoint = ray.GetPoint(enter);
+                    offset = selectedObject.transform.position - hitPoint;
+                }
+
+                Debug.Log($"Selected Object: {selectedObject.name}");
+            }
+        }
+
+        private void DragObject()
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (dragPlane.Raycast(ray, out float enter))
+            {
+                Vector3 hitPoint = ray.GetPoint(enter);
+                Vector3 newPosition = hitPoint + offset;
+
+                selectedObject.transform.position = newPosition;
+            }
+        }
+
+        private void ReleaseObject()
+        {
+            Debug.Log($"Released Object: {selectedObject.name}");
+            //selectedObject = null;
         }
 
         public void CordsChanged()
@@ -185,6 +205,8 @@ namespace Assets.Scripts {
             yInput.text = currentPos.y.ToString("F2");
             zInput.text = currentPos.z.ToString("F2");
         }
+
+        #endregion
 
         public void ListItemSelected()
         {
