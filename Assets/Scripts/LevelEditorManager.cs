@@ -1,4 +1,6 @@
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -19,8 +21,9 @@ namespace Assets.Scripts {
         public TMP_Dropdown roomsDropdown;
         public TMP_InputField saveRoomInput;
 
-        private string obstaclesPath = "Assets/Prefabs/Obstacles";
-        private string roomsPath = "Assets/Resources/Rooms";
+        private readonly string obstaclesPath = "Assets/Prefabs/Obstacles";
+        private readonly string roomsPath = "Assets/Resources/Rooms";
+        private List<GameObject> obstacleGameObjects = new();
 
         void Start(){
             // 1. Check Screen.width and set panel width accordingly
@@ -37,6 +40,7 @@ namespace Assets.Scripts {
         void PopulateObstacles()
         {
             obstacleSelector.ClearOptions();
+            obstacleGameObjects.Clear(); 
 
             if (!Directory.Exists(obstaclesPath))
             {
@@ -44,10 +48,7 @@ namespace Assets.Scripts {
                 Debug.Log($"Created directory: {obstaclesPath}");
             }
 
-#if UNITY_EDITOR
-            // Editor-only: Use AssetDatabase to load obstacles
             string[] assetPaths = AssetDatabase.FindAssets("t:Prefab", new[] { obstaclesPath });
-            var obstacleNames = new System.Collections.Generic.List<string>();
 
             foreach (var guid in assetPaths)
             {
@@ -55,21 +56,11 @@ namespace Assets.Scripts {
                 GameObject obstacle = AssetDatabase.LoadAssetAtPath<GameObject>(path);
                 if (obstacle != null)
                 {
-                    obstacleNames.Add(obstacle.name);
+                    obstacleGameObjects.Add(obstacle);
                 }
             }
-            obstacleSelector.AddOptions(obstacleNames);
-#else
-            // Runtime: Use Resources.LoadAll for obstacles
-            GameObject[] obstacles = Resources.LoadAll<GameObject>(runtimeObstaclesPath);
-            var obstacleNames = new System.Collections.Generic.List<string>();
 
-            foreach (var obstacle in obstacles) {
-                obstacleNames.Add(obstacle.name);
-            }
-
-            obstacleSelector.AddOptions(obstacleNames);
-#endif
+            obstacleSelector.AddOptions(obstacleGameObjects.Select(x => x.name).ToList());
         }
 
         void PopulateRooms()
@@ -82,11 +73,9 @@ namespace Assets.Scripts {
                 Debug.Log($"Created directory: {roomsPath}");
             }
 
-            // Load all rooms from "Assets/Resources/Rooms"
             TextAsset[] rooms = Resources.LoadAll<TextAsset>("Rooms");
 
-            // Extract names and add them to the dropdown
-            var roomNames = new System.Collections.Generic.List<string>();
+            var roomNames = new List<string>();
             foreach (var room in rooms)
             {
                 roomNames.Add(room.name);
@@ -102,37 +91,17 @@ namespace Assets.Scripts {
 
         public void CreateObject()
         {
-            string selectedObstacleName = obstacleSelector.options[obstacleSelector.value].text;
+            GameObject selectedObstacle = obstacleGameObjects[obstacleSelector.value];
 
-            GameObject prefab = null;
-
-#if UNITY_EDITOR
-            // Editor-only: Load the prefab using AssetDatabase
-            string[] assetPaths = AssetDatabase.FindAssets(selectedObstacleName, new[] { obstaclesPath });
-            if (assetPaths.Length > 0)
+            if (selectedObstacle != null)
             {
-                string path = AssetDatabase.GUIDToAssetPath(assetPaths[0]);
-                prefab = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-            }
-#else
-            // Runtime: Load the prefab from Resources
-            prefab = Resources.Load<GameObject>($"{runtimeObstaclesPath}/{selectedObstacleName}");
-#endif
-
-            if (prefab != null)
-            {
-                // Parse position input fields
-                float.TryParse(xInput.text, out float x);
-                float.TryParse(yInput.text, out float y);
-                float.TryParse(zInput.text, out float z);
-
-                // Instantiate the prefab
-                Instantiate(prefab, new Vector3(x, y, z), Quaternion.identity);
-                Debug.Log($"Created object: {selectedObstacleName} at position ({x}, {y}, {z})");
+                Vector3 position = new(50, 50, 0);
+                Instantiate(selectedObstacle, position, Quaternion.identity);
+                Debug.Log($"Instantiated: {selectedObstacle.name}");
             }
             else
             {
-                Debug.LogError($"Prefab not found: {selectedObstacleName}");
+                Debug.LogError("No obstacle selected!");
             }
         }
 
@@ -160,5 +129,7 @@ namespace Assets.Scripts {
         {
 
         }
+
+
     }
 }
