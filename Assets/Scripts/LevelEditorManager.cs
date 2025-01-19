@@ -1,4 +1,3 @@
-
 using TMPro;
 using UnityEngine;
 
@@ -28,31 +27,38 @@ namespace Assets.Scripts {
             // 3. load & populate room names from the `Assets/Resources/Rooms` dir
         }
 
-        public void DeleteObject(){
+        public void DeleteObject()
+        {
 
         }
         
-        public void CreateObject(){
+        public void CreateObject()
+        {
 
         }
 
-        public void ToggleViewMode() {
+        public void ToggleViewMode() 
+        {
 
         }
 
-        public void CoordsChanged(){
+        public void CoordsChanged()
+        {
 
         }
 
-        public void ListItemSelected(){
+        public void ListItemSelected()
+        {
 
         }
 
-        public void LoadRoom(){
+        public void LoadRoom()
+        {
 
         }
 
-        public void SaveRoom(){
+        public void SaveRoom()
+        {
 
         }
     }
