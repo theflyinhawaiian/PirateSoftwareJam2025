@@ -4,6 +4,7 @@ using System.Linq;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Assets.Scripts {
     enum ViewMode {
@@ -43,8 +44,8 @@ namespace Assets.Scripts {
         void Update()
         {
             if (Input.GetMouseButtonDown(0))
-            {
-                SelectObject();
+            { 
+                HandleMouseClick();                
             }
 
             if (Input.GetMouseButton(0) && selectedObject != null)
@@ -52,15 +53,10 @@ namespace Assets.Scripts {
                 DragObject();
             }
 
-            if (Input.GetMouseButtonUp(0) && selectedObject != null)
-            {
-                ReleaseObject();
-            }
-
             if (selectedObject != null)
             {
                 CordsChanged();
-            }            
+            }
         }
 
         private void PopulateObstacles()
@@ -91,23 +87,7 @@ namespace Assets.Scripts {
 
         private void PopulateRooms()
         {
-            roomsDropdown.ClearOptions();
 
-            if (!Directory.Exists(roomsPath))
-            {
-                Directory.CreateDirectory(roomsPath);
-                Debug.Log($"Created directory: {roomsPath}");
-            }
-
-            TextAsset[] rooms = Resources.LoadAll<TextAsset>("Rooms");
-
-            var roomNames = new List<string>();
-            foreach (var room in rooms)
-            {
-                roomNames.Add(room.name);
-            }
-
-            roomsDropdown.AddOptions(roomNames);
         }
 
         public void CreateObject()
@@ -132,13 +112,10 @@ namespace Assets.Scripts {
             {
                 Debug.Log($"Deleting Object: {selectedObject.name}");
 
-                // Destroy the selected object
                 Destroy(selectedObject);
 
-                // Clear the selection
                 selectedObject = null;
 
-                // Clear the input fields
                 xInput.text = "";
                 yInput.text = "";
                 zInput.text = "";
@@ -156,43 +133,71 @@ namespace Assets.Scripts {
 
         #region Object-Movement
 
-        private void SelectObject()
+        private void HandleMouseClick()
         {
+            if (EventSystem.current.IsPointerOverGameObject()) { return; }
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hit))
             {
-                selectedObject = hit.collider.gameObject;
+                GameObject clickedObject = hit.collider.gameObject;
 
-                dragPlane = new Plane(Camera.main.transform.forward, selectedObject.transform.position);
-
-                if (dragPlane.Raycast(ray, out float enter))
+                if (clickedObject != selectedObject)
                 {
-                    Vector3 hitPoint = ray.GetPoint(enter);
-                    offset = selectedObject.transform.position - hitPoint;
+                    SelectObject(clickedObject);
                 }
-
-                Debug.Log($"Selected Object: {selectedObject.name}");
             }
+            else
+            {
+                DeselectObject();
+            }
+        }
+
+        void SelectObject(GameObject obj)
+        {
+            selectedObject = obj;
+
+            dragPlane = new Plane(Camera.main.transform.forward, selectedObject.transform.position);
+
+            Debug.Log($"Selected Object: {selectedObject.name}");
+
+            Vector3 pos = selectedObject.transform.position;
+            xInput.text = pos.x.ToString("F2");
+            yInput.text = pos.y.ToString("F2");
+            zInput.text = pos.z.ToString("F2");
         }
 
         private void DragObject()
         {
+            if (selectedObject == null || EventSystem.current.IsPointerOverGameObject()) { return; }
+
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (dragPlane.Raycast(ray, out float enter))
             {
                 Vector3 hitPoint = ray.GetPoint(enter);
+
                 Vector3 newPosition = hitPoint + offset;
 
                 selectedObject.transform.position = newPosition;
+
+                CordsChanged();
             }
         }
 
-        private void ReleaseObject()
+        private void DeselectObject()
         {
-            Debug.Log($"Released Object: {selectedObject.name}");
-            //selectedObject = null;
+            if (selectedObject != null)
+            {
+                Debug.Log($"Deselected Object: {selectedObject.name}");
+            }
+
+            selectedObject = null;
+
+            xInput.text = "";
+            yInput.text = "";
+            zInput.text = "";
         }
 
         public void CordsChanged()
