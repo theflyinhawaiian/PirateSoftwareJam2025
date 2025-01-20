@@ -43,8 +43,7 @@ namespace Assets.Scripts {
                 AdjustUISize();
 
             if (Input.GetMouseButtonDown(0))
-                HandleMouseClick();                
-            
+                HandleMouseClick();                            
 
             if (selectedObject != null)
                 UpdateCoordinateText();
