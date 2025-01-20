@@ -26,7 +26,7 @@ namespace Assets.Scripts {
         private readonly string roomsPath = "Assets/Resources/Rooms";
         private List<GameObject> obstacleGameObjects = new();
         private GameObject selectedObject;
-        private Plane dragPlane;          // Plane for object movement
+        private Plane dragPlane;
         private Vector3 offset;
 
         void Start(){
