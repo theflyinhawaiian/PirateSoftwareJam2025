@@ -1,6 +1,6 @@
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Assets.Model;
 using TMPro;
 using UnityEditor;
@@ -13,12 +13,18 @@ namespace Assets.Scripts {
     }
 
     public class LevelEditorManager : MonoBehaviour {
+        private class RoomInfo {
+            public string Name;
+            public Room Data;
+        }
+
         public TMP_Dropdown obstacleSelector;
         public TMP_Dropdown roomsDropdown;
         public TMP_InputField saveRoomInput;
         private readonly string obstaclesPath = "Assets/Prefabs/Obstacles";
         private readonly string roomsPath = "Assets/Resources/Rooms";
         private List<GameObject> obstacleGameObjects = new();
+        private List<RoomInfo> savedRooms = new();
         private GameObject selectedObject;
         private List<GameObject> roomContents = new();
         private int nextId = 0;
@@ -46,30 +52,23 @@ namespace Assets.Scripts {
             obstacleSelector.ClearOptions();
             obstacleGameObjects.Clear(); 
 
-            if (!Directory.Exists(obstaclesPath))
-            {
-                Directory.CreateDirectory(obstaclesPath);
-                Debug.Log($"Created directory: {obstaclesPath}");
-            }
-
-            string[] assetPaths = AssetDatabase.FindAssets("t:Prefab", new[] { obstaclesPath });
-
-            foreach (var guid in assetPaths)
-            {
-                string path = AssetDatabase.GUIDToAssetPath(guid);
-                GameObject obstacle = AssetDatabase.LoadAssetAtPath<GameObject>(path);
-                if (obstacle != null)
-                {
-                    obstacleGameObjects.Add(obstacle);
-                }
-            }
+            obstacleGameObjects = AssetFinder.GetPrefabs(obstaclesPath);
 
             obstacleSelector.AddOptions(obstacleGameObjects.Select(x => x.name).ToList());
         }
 
         private void PopulateRooms()
         {
+            roomsDropdown.ClearOptions();
 
+            var roomData = AssetFinder.GetText(roomsPath);
+
+            savedRooms = roomData.Select(x => new RoomInfo {
+                Name = x.name,
+                Data = JsonUtility.FromJson<Room>(x.text)
+            }).ToList();
+
+            roomsDropdown.AddOptions(savedRooms.Select(x => x.Name).ToList());
         }
 
         public void CreateObject()
@@ -123,7 +122,14 @@ namespace Assets.Scripts {
 
         public void LoadRoom()
         {
-            var room = roomSerializer.LoadRoom("myRoom");
+            foreach(var entity in roomContents){
+                Destroy(entity);
+            }
+
+            roomContents.Clear();
+
+            var roomName = roomsDropdown.options[roomsDropdown.value].text;
+            var room = roomSerializer.LoadRoom(roomName);
 
             foreach(var entity in room.Entities){
                 var gameObj = obstacleGameObjects[(int)entity.Type];
@@ -136,7 +142,11 @@ namespace Assets.Scripts {
 
                 meta.moveSpeed = 0;
                 meta.id = entity.Id;
+
+                roomContents.Add(instance);
             }
+
+            nextId = room.Entities.Last().Id + 1;
         }
 
         public void SaveRoom()
@@ -161,7 +171,18 @@ namespace Assets.Scripts {
                         };
                     }).ToList()
                 };
-            roomSerializer.SaveRoom(room, "myRoom");
+            var regex = new Regex(@"\d+");
+            
+            var lastRoom = savedRooms.LastOrDefault();
+            var numStr = "";
+            if(lastRoom == null){
+                numStr = "0001";
+            }else{
+                var num = int.Parse(regex.Match(lastRoom.Name).Value) + 1;
+                numStr = $"{num}".PadLeft(4, '0');
+            }
+
+            roomSerializer.SaveRoom(room, $"room{numStr}");
         }
     }
 }
