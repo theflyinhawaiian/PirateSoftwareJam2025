@@ -27,11 +27,11 @@ namespace Assets.Scripts {
         private GameObject selectedObject;
         private Plane dragPlane;
         private Vector3 offset;
+        float screenWidth;
+        RectTransform panelTransform;
 
-        void Start(){
-            
-            float screenWidth;
-            RectTransform panelTransform;
+        void Start()
+        { 
             panelTransform = panel.GetComponent<RectTransform>();
 
             // 1. load & populate obstacle names from the `Assets/Prefabs/Obstacles`
@@ -41,10 +41,6 @@ namespace Assets.Scripts {
             // 3. load & populate room names from the `Assets/Resources/Rooms` dir
             PopulateRooms();
             // 2. load & populate room names from the `Assets/Resources/Rooms` dir
-        }
-
-        void Update(){
-
         }
 
         void Update()
@@ -70,6 +66,7 @@ namespace Assets.Scripts {
 
         private void AdjustUISize()
         {
+            
             screenWidth = Screen.width;
             var offsetMin = panelTransform.offsetMin;
             offsetMin.x = Screen.width * .8f;
