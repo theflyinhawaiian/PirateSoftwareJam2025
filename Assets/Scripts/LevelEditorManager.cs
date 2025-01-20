@@ -21,7 +21,6 @@ namespace Assets.Scripts {
         public TMP_InputField zInput;
         public TMP_Dropdown roomsDropdown;
         public TMP_InputField saveRoomInput;
-
         private readonly string obstaclesPath = "Assets/Prefabs/Obstacles";
         private readonly string roomsPath = "Assets/Resources/Rooms";
         private List<GameObject> obstacleGameObjects = new();
@@ -30,19 +29,29 @@ namespace Assets.Scripts {
         private Vector3 offset;
 
         void Start(){
-            // 1. Check Screen.width and set panel width accordingly
-            var transform = panel.GetComponent<RectTransform>();
+            
+            float screenWidth;
+            RectTransform panelTransform;
+            panelTransform = panel.GetComponent<RectTransform>();
 
-            // 2. load & populate obstacle names from the `Assets/Prefabs/Obstacles`
+            // 1. load & populate obstacle names from the `Assets/Prefabs/Obstacles`
             //   dir
             PopulateObstacles();
 
             // 3. load & populate room names from the `Assets/Resources/Rooms` dir
             PopulateRooms();
+            // 2. load & populate room names from the `Assets/Resources/Rooms` dir
+        }
+
+        void Update(){
+
         }
 
         void Update()
         {
+            if(screenWidth != Screen.width)
+                AdjustUISize();
+
             if (Input.GetMouseButtonDown(0))
             { 
                 HandleMouseClick();                
@@ -57,6 +66,14 @@ namespace Assets.Scripts {
             {
                 CordsChanged();
             }
+        }
+
+        private void AdjustUISize()
+        {
+            screenWidth = Screen.width;
+            var offsetMin = panelTransform.offsetMin;
+            offsetMin.x = Screen.width * .8f;
+            panelTransform.offsetMin = offsetMin;
         }
 
         private void PopulateObstacles()
