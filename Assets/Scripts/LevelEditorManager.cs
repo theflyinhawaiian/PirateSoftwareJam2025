@@ -25,8 +25,6 @@ namespace Assets.Scripts {
         private readonly string roomsPath = "Assets/Resources/Rooms";
         private List<GameObject> obstacleGameObjects = new();
         private GameObject selectedObject;
-        private Plane dragPlane;
-        private Vector3 offset;
         float screenWidth;
         RectTransform panelTransform;
 
@@ -34,13 +32,9 @@ namespace Assets.Scripts {
         { 
             panelTransform = panel.GetComponent<RectTransform>();
 
-            // 1. load & populate obstacle names from the `Assets/Prefabs/Obstacles`
-            //   dir
             PopulateObstacles();
 
-            // 3. load & populate room names from the `Assets/Resources/Rooms` dir
             PopulateRooms();
-            // 2. load & populate room names from the `Assets/Resources/Rooms` dir
         }
 
         void Update()
@@ -49,19 +43,11 @@ namespace Assets.Scripts {
                 AdjustUISize();
 
             if (Input.GetMouseButtonDown(0))
-            { 
                 HandleMouseClick();                
-            }
-
-            if (Input.GetMouseButton(0) && selectedObject != null)
-            {
-                DragObject();
-            }
+            
 
             if (selectedObject != null)
-            {
-                CordsChanged();
-            }
+                UpdateCoordinateText();
         }
 
         private void AdjustUISize()
@@ -172,32 +158,9 @@ namespace Assets.Scripts {
         {
             selectedObject = obj;
 
-            dragPlane = new Plane(Camera.main.transform.forward, selectedObject.transform.position);
-
             Debug.Log($"Selected Object: {selectedObject.name}");
 
-            Vector3 pos = selectedObject.transform.position;
-            xInput.text = pos.x.ToString("F2");
-            yInput.text = pos.y.ToString("F2");
-            zInput.text = pos.z.ToString("F2");
-        }
-
-        private void DragObject()
-        {
-            if (selectedObject == null || EventSystem.current.IsPointerOverGameObject()) { return; }
-
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (dragPlane.Raycast(ray, out float enter))
-            {
-                Vector3 hitPoint = ray.GetPoint(enter);
-
-                Vector3 newPosition = hitPoint + offset;
-
-                selectedObject.transform.position = newPosition;
-
-                CordsChanged();
-            }
+            UpdateCoordinateText();
         }
 
         private void DeselectObject()
@@ -214,7 +177,7 @@ namespace Assets.Scripts {
             zInput.text = "";
         }
 
-        public void CordsChanged()
+        public void UpdateCoordinateText()
         {
             if (selectedObject == null) return;
 
