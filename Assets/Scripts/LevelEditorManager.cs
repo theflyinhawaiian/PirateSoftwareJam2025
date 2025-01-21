@@ -40,9 +40,25 @@ namespace Assets.Scripts {
         }
 
         void Update()
-        {
-            if(Selection.activeGameObject != selectedObject){
-                selectedObject = Selection.activeGameObject;
+        {            
+            if(Selection.activeGameObject != selectedObject)
+            {
+                if (Selection.activeGameObject == null)
+                {
+                    selectedObject = null;
+                    return;
+                }
+
+                Transform asf = Selection.activeGameObject.transform;
+
+                while (asf.parent != null)
+                {
+                    asf = asf.parent;
+                } 
+
+                selectedObject = asf.gameObject;
+                Selection.activeGameObject = selectedObject;
+                
                 Debug.Log(selectedObject);
             }
         }
