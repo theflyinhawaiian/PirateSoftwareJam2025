@@ -1,8 +1,9 @@
 using UnityEngine;
 
-public class ObstacleMovement : MonoBehaviour
+public class EntityBehavior : MonoBehaviour
 {
     public float moveSpeed = 5;
+    public int id;
 
     Rigidbody rb;
     void Start()
