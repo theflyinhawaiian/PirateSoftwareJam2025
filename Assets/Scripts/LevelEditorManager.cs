@@ -21,7 +21,6 @@ namespace Assets.Scripts {
         public TMP_Dropdown obstacleSelector;
         public TMP_Dropdown roomsDropdown;
         public TMP_InputField saveRoomInput;
-        private readonly string obstaclesPath = "Assets/Prefabs/Obstacles";
         private readonly string roomsPath = "Assets/Resources/Rooms";
         private List<GameObject> obstacleGameObjects = new();
         private List<RoomInfo> savedRooms = new();
@@ -68,7 +67,7 @@ namespace Assets.Scripts {
             obstacleSelector.ClearOptions();
             obstacleGameObjects.Clear(); 
 
-            obstacleGameObjects = AssetFinder.GetPrefabs(obstaclesPath);
+            obstacleGameObjects = AssetFinder.GetObstaclePrefabs();
 
             obstacleSelector.AddOptions(obstacleGameObjects.Select(x => x.name).ToList());
         }
