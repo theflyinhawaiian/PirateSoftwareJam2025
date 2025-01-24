@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 2352337682116418213}
   - component: {fileID: 2476856237869931354}
   - component: {fileID: 1201096205169591200}
-  - component: {fileID: 6073314969027200593}
   - component: {fileID: 1205387969234033996}
+  - component: {fileID: -8181329958555610756}
   m_Layer: 0
   m_Name: PillarObstacle
   m_TagString: Obstacle
@@ -354,19 +354,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &6073314969027200593
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7467615560171962987}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b110338dabc3c7a47b23ef1fa50a6cce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!54 &1205387969234033996
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -394,3 +381,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-8181329958555610756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7467615560171962987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95c5720784da06488ddddef63ad6f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  id: 0
