@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace Assets.Scripts {
     public class AssetFinder {
+        private const string obstaclesPath = "Assets/Prefabs/Obstacles";
         private static void EnsurePathExists(string path){
             if (Directory.Exists(path))
                 return;
@@ -14,8 +15,8 @@ namespace Assets.Scripts {
             Debug.Log($"Created directory: {path}");
         }
 
-        public static List<GameObject> GetPrefabs(string path){
-            return Get<GameObject>("t:prefab", path);
+        public static List<GameObject> GetObstaclePrefabs(){
+            return Get<GameObject>("t:prefab", obstaclesPath);
         }
 
         public static List<TextAsset> GetText(string path){
