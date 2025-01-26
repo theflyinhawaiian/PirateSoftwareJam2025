@@ -151,7 +151,7 @@ namespace Assets.Scripts {
                 var instance = Instantiate(gameObj);
                 var transform = instance.transform;
                 transform.position = new Vector3(entity.XPosition, entity.YPosition, entity.ZPosition);
-                transform.rotation = new Quaternion(entity.XRotation, entity.YRotation, entity.ZRotation, 1);
+                transform.rotation = new Quaternion(entity.XRotation, entity.YRotation, entity.ZRotation, entity.WValue);
                 transform.localScale = new Vector3(entity.XScale, entity.YScale, entity.ZScale);
                 var meta = instance.GetComponent<ObstacleBehavior>();
 
@@ -179,6 +179,7 @@ namespace Assets.Scripts {
                             XRotation = objTransform.rotation.x,
                             YRotation = objTransform.rotation.y,
                             ZRotation = objTransform.rotation.z,
+                            WValue = objTransform.rotation.w,
                             XScale = objTransform.localScale.x,
                             YScale = objTransform.localScale.y,
                             ZScale = objTransform.localScale.z,
