@@ -107,7 +107,7 @@ namespace Assets.Scripts {
         private void InitializeEntity(GameObject entity){
             var rb = entity.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
-            var behavior = entity.GetComponent<ObstacleBehavior>();
+            var behavior = entity.GetComponent<EntityBehavior>();
             // TODO: Give the behavior a place to read moveSpeed value from so we can control it more dynamically
             behavior.moveSpeed = 0;
             behavior.id = nextId;
@@ -157,7 +157,7 @@ namespace Assets.Scripts {
                 transform.position = new Vector3(entity.XPosition, entity.YPosition, entity.ZPosition);
                 transform.rotation = new Quaternion(entity.XRotation, entity.YRotation, entity.ZRotation, entity.WValue);
                 transform.localScale = new Vector3(entity.XScale, entity.YScale, entity.ZScale);
-                var meta = instance.GetComponent<ObstacleBehavior>();
+                var meta = instance.GetComponent<EntityBehavior>();
 
                 meta.moveSpeed = 0;
                 meta.id = entity.Id;
@@ -172,7 +172,7 @@ namespace Assets.Scripts {
         {
             var room = new Room {
                 Entities = roomContents.Select(x => {
-                    var meta = x.GetComponent<ObstacleBehavior>();
+                    var meta = x.GetComponent<EntityBehavior>();
                     var objTransform = x.transform;
                     return new Entity {
                             // Need to strip the '(Clone)' portion of the name

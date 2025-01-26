@@ -1,0 +1,32 @@
+{
+    "Entities": [
+        {
+            "Type": 3,
+            "XPosition": -8.5,
+            "YPosition": 1.5000003576278687,
+            "ZPosition": -39.0,
+            "XRotation": -0.7071067690849304,
+            "YRotation": 0.0,
+            "ZRotation": 0.0,
+            "WValue": 0.7071068286895752,
+            "XScale": 4.0,
+            "YScale": 2.0,
+            "ZScale": 4.0,
+            "Id": 0
+        },
+        {
+            "Type": 4,
+            "XPosition": 1.9811358451843262,
+            "YPosition": 4.000399589538574,
+            "ZPosition": -44.03192138671875,
+            "XRotation": -0.000002650659553182777,
+            "YRotation": -0.7071819305419922,
+            "ZRotation": -4.0140005808098069e-7,
+            "WValue": 0.7070316672325134,
+            "XScale": 1.5,
+            "YScale": 1.5,
+            "ZScale": 1.5,
+            "Id": 1
+        }
+    ]
+}
