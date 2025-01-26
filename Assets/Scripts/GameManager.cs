@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public int playerMoney = 0;
-    public int playerHealth = 3;
+    public int playerHealth;
     public ISpawner spawner;
     public List<IGameEventListener> listeners = new();
 
@@ -14,12 +14,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void InitializeGame(int currentPlayerMoney){
-        playerMoney = currentPlayerMoney;
+
     }
 
     void Start()
     {
         spawner = new MixedSpawner(transform, this);
+        playerMoney = GameState.PlayerMoney;
+        playerHealth = GameState.DurabilityLevel + 3;
     }
 
     void Update()
