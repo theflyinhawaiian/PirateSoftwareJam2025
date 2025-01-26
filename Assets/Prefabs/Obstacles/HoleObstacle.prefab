@@ -4103,7 +4103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6010561457424122438}
   - component: {fileID: 1921794045581106657}
-  - component: {fileID: 5316708272679090996}
+  - component: {fileID: 1753788831888317040}
   m_Layer: 0
   m_Name: HoleObstacle
   m_TagString: Obstacle
@@ -4155,7 +4155,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5316708272679090996
+--- !u!114 &1753788831888317040
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4167,7 +4167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95c5720784da06488ddddef63ad6f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 0
   id: 0
 --- !u!1 &6547303986262024226
 GameObject:

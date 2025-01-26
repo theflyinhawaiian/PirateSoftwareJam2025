@@ -1,0 +1,18 @@
+{
+    "Entities": [
+        {
+            "Type": 3,
+            "XPosition": 0.0,
+            "YPosition": 7.5,
+            "ZPosition": -44.5,
+            "XRotation": 0.0,
+            "YRotation": 0.0,
+            "ZRotation": 0.0,
+            "WValue": 1.0,
+            "XScale": 2.0,
+            "YScale": 2.5,
+            "ZScale": 2.0,
+            "Id": 0
+        }
+    ]
+}

@@ -1,0 +1,60 @@
+{
+    "Entities": [
+        {
+            "Type": 3,
+            "XPosition": 0.0,
+            "YPosition": 7.5,
+            "ZPosition": -48.5,
+            "XRotation": 0.0,
+            "YRotation": 0.0,
+            "ZRotation": 0.0,
+            "WValue": 1.0,
+            "XScale": 2.0,
+            "YScale": 2.5,
+            "ZScale": 2.0,
+            "Id": 0
+        },
+        {
+            "Type": 3,
+            "XPosition": 2.9802322387695315e-8,
+            "YPosition": 7.5,
+            "ZPosition": -77.0,
+            "XRotation": 0.0,
+            "YRotation": 0.0,
+            "ZRotation": 0.7071067690849304,
+            "WValue": 0.7071068286895752,
+            "XScale": 2.0,
+            "YScale": 3.0999999046325685,
+            "ZScale": 2.0,
+            "Id": 1
+        },
+        {
+            "Type": 3,
+            "XPosition": -4.470348358154297e-7,
+            "YPosition": -0.5,
+            "ZPosition": -77.0,
+            "XRotation": 0.0,
+            "YRotation": 0.0,
+            "ZRotation": 0.7071067690849304,
+            "WValue": 0.7071068286895752,
+            "XScale": 2.0,
+            "YScale": 3.0999999046325685,
+            "ZScale": 2.0,
+            "Id": 2
+        },
+        {
+            "Type": 3,
+            "XPosition": 0.0,
+            "YPosition": 15.5,
+            "ZPosition": -77.0,
+            "XRotation": 0.0,
+            "YRotation": 0.0,
+            "ZRotation": 0.7071067690849304,
+            "WValue": 0.7071068286895752,
+            "XScale": 2.0,
+            "YScale": 3.0999999046325685,
+            "ZScale": 2.0,
+            "Id": 3
+        }
+    ]
+}

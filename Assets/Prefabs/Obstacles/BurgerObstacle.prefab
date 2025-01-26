@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8937796829009211960}
   - component: {fileID: 2776932412840210822}
   - component: {fileID: 6922769509166761077}
-  - component: {fileID: -5599176533442587258}
+  - component: {fileID: -8213235948414154396}
   m_Layer: 0
   m_Name: BurgerObstacle
   m_TagString: Obstacle
@@ -1200,7 +1200,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-5599176533442587258
+--- !u!114 &-8213235948414154396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1212,5 +1212,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95c5720784da06488ddddef63ad6f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 0
   id: 0

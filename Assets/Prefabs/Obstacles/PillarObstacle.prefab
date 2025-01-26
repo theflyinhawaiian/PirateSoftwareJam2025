@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 2476856237869931354}
   - component: {fileID: 1201096205169591200}
   - component: {fileID: 1205387969234033996}
-  - component: {fileID: -8181329958555610756}
+  - component: {fileID: 806971525863617700}
   m_Layer: 0
   m_Name: PillarObstacle
   m_TagString: Obstacle
@@ -381,7 +381,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &-8181329958555610756
+--- !u!114 &806971525863617700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -393,5 +393,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95c5720784da06488ddddef63ad6f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 0
   id: 0
