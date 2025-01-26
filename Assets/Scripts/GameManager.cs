@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
@@ -6,6 +7,11 @@ public class GameManager : MonoBehaviour
     public int playerMoney = 0;
     public int playerHealth = 3;
     public ISpawner spawner;
+    public List<IGameEventListener> listeners = new();
+
+    public void RegisterListener(IGameEventListener listener){
+        listeners.Add(listener);
+    }
 
     public void InitializeGame(int currentPlayerMoney){
         playerMoney = currentPlayerMoney;
