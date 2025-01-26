@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class EntityBehavior : MonoBehaviour
 {
-    public float moveSpeed = 5f;
     public int id;
 
+    protected GameManager manager;
     protected Rigidbody rb;
     void Start()
     {
@@ -14,7 +14,7 @@ public class EntityBehavior : MonoBehaviour
 
     void FixedUpdate()
     {
-        rb.MovePosition(new Vector3(rb.position.x, rb.position.y, rb.position.z - (moveSpeed * Time.deltaTime)));
+        rb.MovePosition(new Vector3(rb.position.x, rb.position.y, rb.position.z - (manager.gameSpeed * Time.deltaTime)));
     }
 
     void OnDrawGizmosSelected()

@@ -3,7 +3,6 @@ using UnityEngine;
 public class TargetBehavior : EntityBehavior 
 {
     private int value = 1;
-    private GameManager manager;
 
     public void SetManager(GameManager manager){
         this.manager = manager;

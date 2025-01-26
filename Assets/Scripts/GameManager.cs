@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static int myValue = 1;
     public int playerMoney = 0;
     public int playerHealth = 3;
+    public float gameSpeed = 15f;
     public ISpawner spawner;
     public List<IGameEventListener> listeners = new();
 
