@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7780811284298592127}
   - component: {fileID: 1231264344497311023}
   m_Layer: 0
-  m_Name: Plane (5)
+  m_Name: top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -323,7 +323,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &4839954693866810061
 GameObject:
@@ -341,7 +341,7 @@ GameObject:
   - component: {fileID: 5677428413456861517}
   - component: {fileID: 7390215657816909889}
   m_Layer: 0
-  m_Name: Plane (4)
+  m_Name: left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -648,7 +648,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &5580603871166970261
 GameObject:
@@ -666,7 +666,7 @@ GameObject:
   - component: {fileID: 4362825985366925273}
   - component: {fileID: 3600433271342912075}
   m_Layer: 0
-  m_Name: Plane (2)
+  m_Name: right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -973,7 +973,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &7911276779224771502
 GameObject:
@@ -991,7 +991,7 @@ GameObject:
   - component: {fileID: 7366719129131545344}
   - component: {fileID: 983810276096126332}
   m_Layer: 0
-  m_Name: Plane
+  m_Name: bottom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1298,7 +1298,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &7976667350602026394
 GameObject:
