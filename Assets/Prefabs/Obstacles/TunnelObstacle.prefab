@@ -361,8 +361,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4773857668130667032}
-  - component: {fileID: 3612187170401987031}
   - component: {fileID: 2394201935462802684}
+  - component: {fileID: 3790537674297955120}
   m_Layer: 0
   m_Name: TunnelObstacle
   m_TagString: Obstacle
@@ -389,19 +389,6 @@ Transform:
   - {fileID: 307359565175819241}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &3612187170401987031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1159365077779042131}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b110338dabc3c7a47b23ef1fa50a6cce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!54 &2394201935462802684
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -429,6 +416,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &3790537674297955120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1159365077779042131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95c5720784da06488ddddef63ad6f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 0
+  id: 0
 --- !u!1 &1279920838746989766
 GameObject:
   m_ObjectHideFlags: 0
