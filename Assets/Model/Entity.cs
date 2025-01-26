@@ -22,6 +22,7 @@ namespace Assets.Model {
         public float XRotation;
         public float YRotation;
         public float ZRotation;
+        public float WValue;
 
         public float XScale;
         public float YScale;
