@@ -1,12 +1,11 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
     public static int myValue = 1;
     public int playerMoney = 0;
-    public int playerHealth;
+    public int playerHealth = 3;
     public ISpawner spawner;
     public List<IGameEventListener> listeners = new();
 
@@ -22,7 +21,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        spawner = new MixedSpawner(transform, this);
+        spawner = new RoomSpawner(transform, this);
         playerMoney = GameState.PlayerMoney;
         playerHealth = GameState.DurabilityLevel + 3;
     }

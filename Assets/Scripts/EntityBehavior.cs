@@ -3,18 +3,23 @@ using UnityEngine;
 
 public class EntityBehavior : MonoBehaviour
 {
-    public float moveSpeed = 5f;
     public int id;
 
     protected Rigidbody rb;
+    protected GameManager manager;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
     }
 
+    public void SetManager(GameManager manager){
+        this.manager = manager;
+    }
+
     void FixedUpdate()
     {
-        rb.MovePosition(new Vector3(rb.position.x, rb.position.y, rb.position.z - (moveSpeed * Time.deltaTime)));
+        var moveSpeed = manager == null ? 0 : manager.moveSpeed;
+        rb.MovePosition(new Vector4(rb.position.x, rb.position.y, rb.position.z - (moveSpeed * Time.deltaTime)));
     }
 
     void OnDrawGizmosSelected()

@@ -24,9 +24,11 @@ public class RandomSpawner : ISpawner
     float bottomBounds;
 
     Transform origin;
-    public RandomSpawner(Transform origin, Transform bounds)
+    GameManager manager;
+    public RandomSpawner(Transform origin, GameManager manager, Transform bounds)
     {
         this.origin = origin;
+        this.manager = manager;
         lastSpawnTime = Time.time;
 
         var prefabs = AssetFinder.GetObstaclePrefabs();
@@ -76,7 +78,7 @@ public class RandomSpawner : ISpawner
         var obj = Object.Instantiate(selectedPrefab.prefab);
         obj.transform.position = targetPos;
         var entity = obj.GetComponent<EntityBehavior>();
-        entity.moveSpeed = 15f;
+        entity.SetManager(manager);
         lastSpawnTime = currTime;
     }
 }
