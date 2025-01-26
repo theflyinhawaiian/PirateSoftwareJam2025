@@ -2,30 +2,32 @@ using System.Linq;
 using Assets.Scripts;
 using UnityEngine;
 
-public class TargetSpawner : ISpawner 
+public class ObstacleSpawner : ISpawner 
 {
-    private GameObject targetPrefab;
+    private GameObject obstaclePrefab;
     private GameManager gameManager;
     public float spawnInterval = 3f;
 
     float lastSpawnTime = 0;
 
     Transform origin;
-    public TargetSpawner(Transform origin, GameManager manager)
+    public ObstacleSpawner(Transform origin, GameManager manager)
     {
         this.origin = origin;
         gameManager = manager;
 
         lastSpawnTime = Time.time;
 
-        var targetPrefab = AssetFinder.GetObstaclePrefabs()
-                            .Where(x => x.name == "Target")
+        var prefabs = AssetFinder.GetObstaclePrefabs();
+
+        var obstaclePrefab = prefabs
+                            .Where(x => x.name == "TunnelObstacle")
                             .SingleOrDefault();
 
-        if(targetPrefab == null)
+        if(obstaclePrefab == null)
             return;
 
-        this.targetPrefab = targetPrefab;
+        this.obstaclePrefab = obstaclePrefab;
     }
 
     public void Spawn()
@@ -37,9 +39,9 @@ public class TargetSpawner : ISpawner
         var targetX = Random.value * 10;
         var targetY = Random.value * 10;
         var targetPos = new Vector3(targetX, targetY, origin.position.z);
-        var obj = GameObject.Instantiate(targetPrefab);
+        var obj = GameObject.Instantiate(obstaclePrefab);
         obj.transform.position = targetPos;
-        var behavior = obj.GetComponent<TargetBehavior>();
+        var behavior = obj.GetComponent<ObstacleBehavior>();
         behavior.SetManager(gameManager);
         lastSpawnTime = currTime;
     }
