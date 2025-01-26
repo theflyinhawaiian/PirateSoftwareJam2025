@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static int myValue = 1;
     public int playerMoney = 0;
     public int playerHealth = 3;
     public ISpawner spawner;
     public List<IGameEventListener> listeners = new();
+
+    public Transform bounds;
 
     public void RegisterListener(IGameEventListener listener){
         listeners.Add(listener);
