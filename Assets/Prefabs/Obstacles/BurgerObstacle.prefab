@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 4459159882767267042}
   - component: {fileID: 8937796829009211960}
   - component: {fileID: 2776932412840210822}
-  - component: {fileID: 2833611646605852967}
   - component: {fileID: 6922769509166761077}
+  - component: {fileID: -5599176533442587258}
   m_Layer: 0
   m_Name: BurgerObstacle
   m_TagString: Obstacle
@@ -1173,19 +1173,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!114 &2833611646605852967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3493420323558222872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b110338dabc3c7a47b23ef1fa50a6cce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
 --- !u!54 &6922769509166761077
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1213,3 +1200,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5599176533442587258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3493420323558222872}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d95c5720784da06488ddddef63ad6f3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  id: 0
