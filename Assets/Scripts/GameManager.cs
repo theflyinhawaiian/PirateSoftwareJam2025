@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -7,6 +6,7 @@ public class GameManager : MonoBehaviour
     public static int myValue = 1;
     public int playerMoney = 0;
     public int playerHealth = 3;
+    public float moveSpeed = 15f;
     public ISpawner spawner;
     public List<IGameEventListener> listeners = new();
 
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        spawner = new MixedSpawner(transform, this);
+        spawner = new RoomSpawner(transform, this);
     }
 
     void Update()
