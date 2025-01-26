@@ -105,6 +105,8 @@ namespace Assets.Scripts {
         }
 
         private void InitializeEntity(GameObject entity){
+            var rb = entity.GetComponent<Rigidbody>();
+            rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
             var behavior = entity.GetComponent<ObstacleBehavior>();
             // TODO: Give the behavior a place to read moveSpeed value from so we can control it more dynamically
             behavior.moveSpeed = 0;
@@ -149,6 +151,8 @@ namespace Assets.Scripts {
             foreach(var entity in room.Entities){
                 var gameObj = obstacleGameObjects[(int)entity.Type];
                 var instance = Instantiate(gameObj);
+                var rb = instance.GetComponent<Rigidbody>();
+                rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
                 var transform = instance.transform;
                 transform.position = new Vector3(entity.XPosition, entity.YPosition, entity.ZPosition);
                 transform.rotation = new Quaternion(entity.XRotation, entity.YRotation, entity.ZRotation, entity.WValue);
