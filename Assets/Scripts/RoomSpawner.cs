@@ -1,5 +1,4 @@
 using UnityEngine;
-using Assets.Model;
 using System.Collections.Generic;
 using Assets.Scripts;
 
@@ -28,7 +27,6 @@ public class RoomSpawner : ISpawner {
     public void SetRoomNumber(int roomNumber) =>
         this.roomNumber = roomNumber;
 
-
     public void Spawn(){
         var currTime = Time.time;
         if(lastSpawnTime + spawnDelay > currTime)
@@ -36,7 +34,6 @@ public class RoomSpawner : ISpawner {
         
         var roomNum = roomNumber == 0 ? 1 + Random.Range(0, fileHandler.FetchRooms().Length) : roomNumber;
         var numStr = $"{roomNum}".PadLeft(4, '0');
-
         var roomToSpawn = fileHandler.LoadRoom($"room{numStr}");
 
         foreach(var entity in roomToSpawn.Entities){
