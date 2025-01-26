@@ -6,10 +6,15 @@ public class GameManager : MonoBehaviour
     public static int myValue = 1;
     public int playerMoney = 0;
     public int playerHealth = 3;
-    public ISpawner spawner;
+    public float moveSpeed = 15f;
+    public int roomNumber = 0;
+    public RoomSpawner spawner;
+
     public List<IGameEventListener> listeners = new();
 
     public Transform bounds;
+
+    int lastRoomNumber;
 
     public void RegisterListener(IGameEventListener listener){
         listeners.Add(listener);
@@ -28,6 +33,10 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        if(lastRoomNumber != roomNumber){
+            spawner.SetRoomNumber(roomNumber);
+            lastRoomNumber = roomNumber;
+        }
         spawner.Spawn();
     }
 

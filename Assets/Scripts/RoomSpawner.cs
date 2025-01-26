@@ -1,5 +1,4 @@
 using UnityEngine;
-using Assets.Model;
 using System.Collections.Generic;
 using Assets.Scripts;
 
@@ -7,6 +6,7 @@ public class RoomSpawner : ISpawner {
     RoomFileHandler fileHandler;
     float lastSpawnTime;
     float spawnDelay = 6f;
+    int roomNumber;
 
     GameManager manager;
     Transform origin;
@@ -24,12 +24,16 @@ public class RoomSpawner : ISpawner {
         obstaclePrefabs = AssetFinder.GetObstaclePrefabs();
     }
 
+    public void SetRoomNumber(int roomNumber) =>
+        this.roomNumber = roomNumber;
+
     public void Spawn(){
         var currTime = Time.time;
         if(lastSpawnTime + spawnDelay > currTime)
             return;
         
-        var numStr = $"{1 + Random.Range(0, 4)}".PadLeft(4, '0');
+        var roomNum = roomNumber == 0 ? 1 + Random.Range(0, fileHandler.FetchRooms().Length) : roomNumber;
+        var numStr = $"{roomNum}".PadLeft(4, '0');
         var roomToSpawn = fileHandler.LoadRoom($"room{numStr}");
 
         foreach(var entity in roomToSpawn.Entities){
