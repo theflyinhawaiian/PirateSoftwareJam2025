@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     public List<IGameEventListener> listeners = new();
 
     public Transform bounds;
-    
+
     public void RegisterListener(IGameEventListener listener){
         listeners.Add(listener);
     }

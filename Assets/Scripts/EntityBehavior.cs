@@ -1,8 +1,9 @@
-﻿using UnityEngine;
+﻿using System.Linq;
+using UnityEngine;
 
 public class EntityBehavior : MonoBehaviour
 {
-    public float moveSpeed = 5;
+    public float moveSpeed = 5f;
     public int id;
 
     protected Rigidbody rb;
@@ -18,15 +19,17 @@ public class EntityBehavior : MonoBehaviour
 
     void OnDrawGizmosSelected()
     {
-        var r = GetComponent<Renderer>();
-        if (r == null)
-            return;
-        var bounds = r.bounds;
-        Gizmos.matrix = Matrix4x4.identity;
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireCube(bounds.center, bounds.extents * 2);
+        var compositeBounds = 
+            transform.GetComponentsInChildren<Renderer>()
+                .Select(x => x.bounds)
+                .Aggregate((intermediateBounds, nextBounds) => {
+                    intermediateBounds.Encapsulate(nextBounds);
+                    return intermediateBounds;
+                });
 
-        Gizmos.DrawRay(transform.position, Vector3.back * 10000);
+        Gizmos.matrix = Matrix4x4.identity;
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(compositeBounds.center, compositeBounds.size * 1.01f);
     }
 }
 
