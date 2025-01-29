@@ -21,15 +21,14 @@ public class GameManager : MonoBehaviour
         listeners.Add(listener);
     }
 
-    public void InitializeGame(int currentPlayerMoney){
-
-    }
-
     void Start()
     {
         spawner = new RoomSpawner(transform, this);
         playerMoney = GameState.PlayerMoney;
         playerHealth = GameState.DurabilityLevel + 3;
+
+        UpdateHealth();
+        UpdateMoney();
     }
 
     void Update()
@@ -45,19 +44,29 @@ public class GameManager : MonoBehaviour
         playerMoney += value;
         Debug.Log($"Money: {playerMoney}");
 
-        foreach(var listener in listeners)
-            listener.MoneyUpdated(playerMoney);
+        UpdateMoney();
     }
 
     public void ObstacleImpacted(int damageValue){
         playerHealth -= damageValue;
         Debug.Log($"Health: {playerHealth}");
 
-        foreach(var listener in listeners)
-            listener.HealthUpdated(playerHealth);
+        UpdateHealth();
 
         if(playerHealth <= 0){
-            SceneManager.LoadScene();
+            GameState.PlayerMoney = playerMoney;
+            SceneManager.LoadScene("Shop");
         }
+    }
+
+
+    private void UpdateMoney() {
+        foreach(var listener in listeners)
+            listener.MoneyUpdated(playerMoney);
+    }
+
+    private void UpdateHealth() {
+        foreach(var listener in listeners)
+            listener.HealthUpdated(playerHealth);
     }
 }

@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class ShopManager : MonoBehaviour
 
     void Start()
     {
+        money = GameState.PlayerMoney;
         UpdateMoneyText();
     }
 
@@ -20,6 +22,7 @@ public class ShopManager : MonoBehaviour
         {
             money -= item.Price;
             item.Quantity--;
+            GameState.DurabilityLevel += 1;
             UpdateMoneyText();
             item.UpdateButtonInfo();
         }        
@@ -28,5 +31,9 @@ public class ShopManager : MonoBehaviour
     private void UpdateMoneyText()
     {
         MoneyTXT.text = $"Money: {money}";
+    }
+
+    public void StartGameTapped(){
+        SceneManager.LoadScene("Main");
     }
 }

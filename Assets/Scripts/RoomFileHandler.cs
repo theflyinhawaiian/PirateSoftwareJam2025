@@ -29,5 +29,5 @@ public class RoomFileHandler
         return FileHandler.ReadFromJSON<Room>(Path.Combine(RoomDir, path));
     }
 
-    public string[] FetchRooms() => FileHandler.GetFiles(RoomDir).Select(x => x.Split("\\").Last().Split(".").First()).ToArray();
+    public string[] FetchRooms() => FileHandler.GetFiles(RoomDir).Where(x => x.Split(".").Length < 3).Select(x => x.Split("\\").Last().Split(".").First()).ToArray();
 }
