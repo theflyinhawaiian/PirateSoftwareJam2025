@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -43,14 +44,20 @@ public class GameManager : MonoBehaviour
     public void TargetDestroyed(int value){
         playerMoney += value;
         Debug.Log($"Money: {playerMoney}");
+
+        foreach(var listener in listeners)
+            listener.MoneyUpdated(playerMoney);
     }
 
     public void ObstacleImpacted(int damageValue){
         playerHealth -= damageValue;
         Debug.Log($"Health: {playerHealth}");
 
+        foreach(var listener in listeners)
+            listener.HealthUpdated(playerHealth);
+
         if(playerHealth <= 0){
-            // fuckin die
+            SceneManager.LoadScene();
         }
     }
 }
