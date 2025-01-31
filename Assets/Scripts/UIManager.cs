@@ -17,10 +17,10 @@ public class UIManager : MonoBehaviour, IGameEventListener
     }
 
     public void HealthUpdated(int currHealth){
-        healthText.text = $"Player Health: {currHealth}";
+        healthText.text = $"Health: {currHealth}";
     }
 
     public void MoneyUpdated(int currMoney){
-        moneyText.text = $"Player Money: {currMoney}";
+        moneyText.text = $"Money: {currMoney}";
     }
 }

@@ -108,8 +108,6 @@ namespace Assets.Scripts {
             var rb = entity.GetComponent<Rigidbody>();
             rb.constraints = RigidbodyConstraints.FreezePosition | RigidbodyConstraints.FreezeRotation;
             var behavior = entity.GetComponent<EntityBehavior>();
-            // TODO: Give the behavior a place to read moveSpeed value from so we can control it more dynamically
-            behavior.moveSpeed = 0;
             behavior.id = nextId;
 
             // increment nextId so the next entity initialized has a unique Id
@@ -159,7 +157,6 @@ namespace Assets.Scripts {
                 transform.localScale = new Vector3(entity.XScale, entity.YScale, entity.ZScale);
                 var meta = instance.GetComponent<EntityBehavior>();
 
-                meta.moveSpeed = 0;
                 meta.id = entity.Id;
 
                 roomContents.Add(instance);
