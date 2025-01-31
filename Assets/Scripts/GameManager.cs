@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
     public void RegisterListener(IGameEventListener listener){
         listeners.Add(listener);
+
+        listener.HealthUpdated(playerHealth);
+        listener.MoneyUpdated(playerMoney);
     }
 
     void Start()
