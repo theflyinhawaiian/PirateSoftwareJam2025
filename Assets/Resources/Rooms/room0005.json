@@ -1,0 +1,60 @@
+{
+    "Entities": [
+        {
+            "Type": 3,
+            "XPosition": -1.6160262823104859,
+            "YPosition": 7.332538604736328,
+            "ZPosition": -61.5,
+            "XRotation": 0.48296257853507998,
+            "YRotation": 0.12940922379493714,
+            "ZRotation": -0.22414354979991914,
+            "WValue": 0.8365166783332825,
+            "XScale": 2.0,
+            "YScale": 4.0,
+            "ZScale": 2.0,
+            "Id": 0
+        },
+        {
+            "Type": 0,
+            "XPosition": 5.836856365203857,
+            "YPosition": 3.1862244606018068,
+            "ZPosition": -55.0,
+            "XRotation": -0.37051188945770266,
+            "YRotation": 0.03548800200223923,
+            "ZRotation": 0.16090479493141175,
+            "WValue": 0.9140958786010742,
+            "XScale": 6.0,
+            "YScale": 6.0,
+            "ZScale": 6.0,
+            "Id": 1
+        },
+        {
+            "Type": 4,
+            "XPosition": 1.5194816589355469,
+            "YPosition": 11.248570442199707,
+            "ZPosition": -36.030609130859378,
+            "XRotation": -0.7070683240890503,
+            "YRotation": 0.0000014486723785012146,
+            "ZRotation": -0.7071453332901001,
+            "WValue": 0.000006322050921880873,
+            "XScale": 2.0,
+            "YScale": 2.0,
+            "ZScale": 2.0,
+            "Id": 2
+        },
+        {
+            "Type": 0,
+            "XPosition": -6.5,
+            "YPosition": 13.0,
+            "ZPosition": -55.0,
+            "XRotation": -0.49572116136550906,
+            "YRotation": -0.11303907632827759,
+            "ZRotation": -0.06526303291320801,
+            "WValue": 0.8586171865463257,
+            "XScale": 4.0,
+            "YScale": 4.0,
+            "ZScale": 4.0,
+            "Id": 3
+        }
+    ]
+}

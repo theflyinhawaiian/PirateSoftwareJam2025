@@ -32,8 +32,9 @@ public class RoomSpawner : ISpawner {
         if(lastSpawnTime + spawnDelay > currTime)
             return;
         
-        var roomNum = roomNumber == 0 ? 1 + Random.Range(0, fileHandler.FetchRooms().Length) : roomNumber;
+        var roomNum = roomNumber == 0 ? 1 + Random.Range(0, fileHandler.FetchRooms().Length - 1) : roomNumber;
         var numStr = $"{roomNum}".PadLeft(4, '0');
+        Debug.Log($"{roomNum}");
         var roomToSpawn = fileHandler.LoadRoom($"room{numStr}");
 
         foreach(var entity in roomToSpawn.Entities){

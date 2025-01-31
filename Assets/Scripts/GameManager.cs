@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public float moveSpeed = 15f;
     public int roomNumber = 0;
     public RoomSpawner spawner;
-
     public List<IGameEventListener> listeners = new();
 
     public Transform bounds;
