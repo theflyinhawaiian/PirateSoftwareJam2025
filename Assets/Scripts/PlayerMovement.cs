@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        rb.linearVelocity = Vector3.zero;
         var vert = Input.GetAxis("Vertical");
         var lat = Input.GetAxis("Horizontal");
         rb.MovePosition(new Vector3(

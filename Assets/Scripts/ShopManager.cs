@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class ShopManager : MonoBehaviour
 {
-    public float money;
+    public int money;
     public TMP_Text MoneyTXT;
 
     void Start()
@@ -34,6 +34,7 @@ public class ShopManager : MonoBehaviour
     }
 
     public void StartGameTapped(){
+        GameState.PlayerMoney = money;
         SceneManager.LoadScene("Main");
     }
 }
