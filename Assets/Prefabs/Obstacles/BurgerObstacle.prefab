@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2776932412840210822}
   - component: {fileID: 6922769509166761077}
   - component: {fileID: -8213235948414154396}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BurgerObstacle
   m_TagString: Obstacle
   m_Icon: {fileID: 0}
@@ -1212,5 +1212,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95c5720784da06488ddddef63ad6f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
   id: 0
