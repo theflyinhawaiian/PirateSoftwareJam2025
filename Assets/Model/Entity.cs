@@ -7,8 +7,8 @@ namespace Assets.Model {
         HangingBeamObstacle,
         HoleObstacle,
         PillarObstacle,
-        TunnelObstacle,
-        Target
+        Target,
+        TunnelObstacle
     }
 
     [Serializable]
